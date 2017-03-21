@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 400px;
+				height: 70px;
+				margin: 300px auto;
+				transform: scale(1.5);
+				overflow: hidden;
+				font-size: 0;
+			}
+			#box div{
+				position: relative;          
+				top:0px;
+				width: 50px;
+				height: 140px;
+				display: inline-block;                /*使用inline-block排列位置，然后只需要用relative+top就可以实现上翻，不需要再使用js通过absolute+left来排列图片，然后通过absolute+top上翻图片*/
+			}
+			#box div img{
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div>
+				<img src="img/0.jpg" alt="" />
+				<img src="img/0.jpg" alt="" />
+			</div>
+			<div>
+				<img src="img/0.jpg" alt="" />
+				<img src="img/0.jpg" alt="" />
+			</div>
+			<div>
+				<img src="img/0.jpg" alt="" />
+				<img src="img/0.jpg" alt="" />
+			</div>
+			<div>
+				<img src="img/0.jpg" alt="" />
+				<img src="img/0.jpg" alt="" />
+			</div>
+			<div>
+				<img src="img/0.jpg" alt="" />
+				<img src="img/0.jpg" alt="" />
+			</div>
+			<div>
+				<img src="img/0.jpg" alt="" />
+				<img src="img/0.jpg" alt="" />
+			</div>
+			<div>
+				<img src="img/0.jpg" alt="" />
+				<img src="img/0.jpg" alt="" />
+			</div>
+			<div>
+				<img src="img/0.jpg" alt="" />
+				<img src="img/0.jpg" alt="" />
+			</div>
+		</div>
+		<script src='先辈封装好的线型公式计算函数tween.js' type="text/javascript" charset="utf-8"></script>
+		<script src='封装好的运动函数move.js' type="text/javascript" charset="utf-8"></script>
+		<script>
+			var box=document.getElementById("box");
+			var divs = box.getElementsByTagName("div");
+			function add0(n){       //如果数字小于0，在它前面补0
+				if(n<10){
+					return "0" + n;
+				}else{
+					return "" + n;
+				}
+			}
+			function setTime(a){    //a=0上面的图片  a=1下面的图片
+				var t = new Date();
+				var h = add0( t.getHours() );
+				var m = add0( t.getMinutes() );
+				var s = add0( t.getSeconds() );//0
+				var str = h + ":" + m + ":" + s;
+				for (var i = 0; i < divs.length; i++) {
+					if(i==2||i==5){//第二位和第五位是“：”
+						divs[i].getElementsByTagName("img")[0].src = "img/c.jpg";
+					}else{
+						divs[i].getElementsByTagName("img")[a].src = "img/"+ str.charAt(i) +".jpg";
+					}	
+				}
+			}
+			function tab(obj){
+				move(obj,{"top":-70},500,"linear",fn1);      //这里的top是改进后的relative的top
+//				function fn1 (obj){  会在函数内var obj；  此时再在函数内使用ojb（92.93行）时，不会去父级找了，会找到函数内部申明的obj其值时undefined，所以92.93行报错    
+				function fn1 (){    //会去找父级obj,正确
+					obj.style.top=0;
+					obj.getElementsByTagName("img")[0].src=obj.getElementsByTagName("img")[1].src;
+				}
+			}
+			//初始化
+//			for (var i = 0; i < divs.length; i++) {    改进成relative之后已经不需要这一段来设置absolute的left了
+//				divs[i].style.left=i*50+"px";
+//			}     
+			setTime(0);
+			setTimeout(function(){
+				divs[2].getElementsByTagName("img")[0].src = "img/b.jpg";
+				divs[5].getElementsByTagName("img")[0].src = "img/b.jpg";
+			},900)
+			//定时器
+			setInterval(function(){
+				setTime(1);
+				//判断翻动
+				for (var i = 0; i < divs.length; i++) {
+					i==2?i++:i=i;    //不判断冒号位置
+					i==5?i++:i=i;
+					if(divs[i].getElementsByTagName("img")[0].src!=divs[i].getElementsByTagName("img")[1].src){//如果上下图片不相等
+						tab(divs[i]);
+					}
+				}
+				//冒号闪烁
+				divs[2].getElementsByTagName("img")[0].src = "img/c.jpg";
+				divs[5].getElementsByTagName("img")[0].src = "img/c.jpg";
+				setTimeout(function(){
+					divs[2].getElementsByTagName("img")[0].src = "img/b.jpg";
+					divs[5].getElementsByTagName("img")[0].src = "img/b.jpg";
+				},900)
+			},1000)
+		</script>
+	</body>
+</html>

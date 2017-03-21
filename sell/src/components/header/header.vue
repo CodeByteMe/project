@@ -26,9 +26,6 @@
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
-    <div class="background">
-      <img :src="seller.avatar" width="100%" height="100%">
-    </div>
     <transition name="fade">
       <div v-show="detailShow" class="detail">
         <div class="detail-wrapper clearfix">
@@ -104,7 +101,7 @@
     position: relative
     overflow: hidden
     color: #fff
-    background: rgba(7, 17, 27, 0.5)
+    background: rgba(225, 145, 51, 1)
     .content-wrapper
       position: relative
       padding: 24px 12px 18px 24px
@@ -113,7 +110,7 @@
         display: inline-block
         vertical-align: top
         img
-          border-radius: 2px
+          border-radius: 35%
       .content
         display: inline-block
         margin-left: 16px
@@ -146,6 +143,7 @@
             margin-right: 4px
             background-size: 12px 12px
             background-repeat: no-repeat
+            border-radius:50%
             &.decrease
               bg-image('decrease_1')
             &.discount
@@ -180,13 +178,13 @@
 
     .bulletin-wrapper
       position: relative
-      height: 28px
-      line-height: 28px
+      height: 27px
+      line-height: 27px
       padding: 0 22px 0 12px
       white-space: nowrap
       overflow: hidden
       text-overflow: ellipsis
-      background: rgba(7, 17, 27, 0.2)
+      border-top:1px dashed rgba(255, 255, 255, 0.3)
       .bulletin-title
         display: inline-block
         vertical-align: top
@@ -205,15 +203,6 @@
         font-size: 10px
         right: 12px
         top: 8px
-
-    .background
-      position: absolute
-      top: 0
-      left: 0
-      width: 100%
-      height: 100%
-      z-index: -1
-      filter: blur(10px)
     .detail
       position: fixed
       z-index: 100
@@ -276,6 +265,7 @@
                 margin-right: 6px
                 background-size: 16px 16px
                 background-repeat: no-repeat
+                border-radius:50%
                 &.decrease
                   bg-image('decrease_2')
                 &.discount

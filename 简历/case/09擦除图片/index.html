@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			.fl:after {
+				content: '';
+				clear: both;
+				display: block;
+			}
+			#box {
+				width: 1010px;
+				height: 810px;
+				margin: 20px auto;
+				
+			}
+			.img {
+				width: 100px;
+				height: 80px;
+				/*background: #f1f1f1;*/
+				/*transition: 1s;*/
+				background: url(img/11.jpg);
+				background-size: 1000px 800px;
+			}
+			#box>div {
+				width: 100px;
+				height: 80px;
+				float: left;
+				margin: 0.5px;
+				
+			}
+			/*#box>div:hover .img {
+				transform: rotateY(360deg);
+				opacity: 0.5;
+			}*/
+		</style>
+	</head>
+	<body>
+		<div id="box" class="fl">
+		</div>
+		<script type="text/javascript">
+			var Box = document.getElementById("box");
+			var Img = document.getElementsByClassName('img');
+			var num = 0;
+			var hs = 'img/hs.jpg';
+			var hsf = 'img/11.jpg';
+			var onoff = true;
+			for (var i=0;i<100;i++) {
+				Box.innerHTML += '<div><div class="img" style="background-position:-'+ ((i%10)*100) +'px -'+ parseInt(i/10)*80 +'px"></div></div>';
+			}
+			for (var i=0;i<100;i++) {
+				Img[i].a = true ;
+				Img[i].onoff = true;
+				Img[i].num = 0;
+				
+				Img[i].onmouseover = function (){
+					if(!this.onoff){
+						return;
+					}
+					this.onoff = false;
+//					this.style.transition = "1s";
+					var that = this;
+					this.timer = setInterval(function(){
+						console.log( that.num );
+						that.num += 2;
+						that.style.transform = "rotateY("+ that.num +"deg)";
+						if(that.num == 360){
+							clearInterval(that.timer);
+							that.style.transform = "rotateY(0deg)";
+							that.onoff = true;
+							that.num = 0;
+							
+						}
+					},2)
+						if(num == 100){
+							//把所有img身上的a变成true
+							for (var i = 0; i < Img.length; i++) {
+								Img[i].a = true;
+							}
+							onoff = !onoff;
+							num = 0;
+						}
+						if(this.a){
+							if(onoff){
+								this.style.backgroundImage = 'url('+ hs +')';
+							}else{
+								this.style.backgroundImage = 'url('+ hsf +')';
+							}
+							
+							this.a =false;
+							num ++;
+						}
+//						console.log(num);
+				};				
+			}
+//			for(var i = 0;i<Img.length;i++){
+//				(function(){
+//					Img[i].addEventListener("transitionend",function(){
+//						console.log(i);
+////						Img[i].style.transition = "none";
+////						Img[i].style.transform = "rotateY(0deg)";
+//					})
+//				})(i)
+//				
+//			}
+//			var str = '';
+//			for(i = 0;i<100;i++){
+//				str += '<div class="img" style="background-position:' + (i%10)*100 + 'px 100px ;"></div>';
+//			}
+//			Box.innerHTML = str;
+		</script>
+	</body>
+</html>

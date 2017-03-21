@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        input{
+            width: 100%;
+            height: 30px;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            display: none;
+        }
+        li{
+            list-style: none;
+            background-color: #009999;
+            margin-top: 3px;       /*改过*/
+            line-height: 30px;
+            width: 100%;
+        }
+        a{
+            text-decoration: none;
+            color:white;
+            display: block;
+            width: 100%;
+        }
+        a:hover,.hover{   /*优先级比.select高，所以hover高亮会覆盖选中状态*/
+            background-color: #00FF99;
+        }
+        #box{
+            width: 500px;
+            margin: 100px auto 0;
+        }
+        .select{
+            background-color: #60625b;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+        	var s=document.getElementById("s");
+        	var list=document.getElementById("list");
+        	var lis=document.getElementsByTagName("li");
+        	//封装函数
+        	function start(e){
+        		var inner=this.getElementsByTagName("a")[0].innerHTML;  //自己innerHTML内容
+        		if(e.ctrlKey==false){              //如果没有按下ctrl，包括鼠标和回车
+        			if(this.onOff==false){//如果自己没有选中，给自己加上选中
+        				for (var i = 0; i < lis.length; i++) {  //遍历所有li
+	        				lis[i].className="";     //清掉所有选中颜色
+	        				lis[i].onOff=false;
+	        			}
+        				this.className="select";
+        				this.onOff=true;
+        				s.value=inner;//清掉所有文字，加上自己的文字
+        			}else{     //如果选中了，清掉所有
+        				for (var i = 0; i < lis.length; i++) {  //遍历所有li
+	        				lis[i].className="";     //清掉所有选中颜色
+	        				lis[i].onOff=false;
+	        			}
+        				s.value="";
+        			}
+        		}else{  //如果按下了ctrl
+        			if(this.onOff==false){    //如果是没有选中的
+        				this.className="select";   //给自己加上选中
+        				s.value+=inner;//加上自己的文字
+        			}else{         //如果是选中的
+        				this.className="";
+        				var num=s.value.indexOf(inner);
+        				s.value=s.value.slice(0,num)+s.value.slice(num+inner.length);//从input中删掉当前的文字
+        			}
+        			this.onOff=!this.onOff;
+        		}
+        	}
+        	function drow(){    //按键时根据当前Num和所有li身上的onOff重绘，解决hover经过select时改变select
+        		for (var i = 0; i < lis.length; i++) {//遍历所有li，如果开关显示它应该是选中的，就让它选中；否则不选中。
+					lis[i].onOff==true?lis[i].className="select":lis[i].className="";
+    			}
+    			lis[Num].className="hover";
+    			lis[Num].getElementsByTagName("a")[0].focus();
+        	}
+        	//初始化
+        	var Num=-1;   //记录当前焦点在谁身上
+        	for (var i = 0; i < lis.length; i++) {
+        		lis[i].onOff=false;   //false对应没有选中状态
+        		lis[i].onclick=start;
+        	}
+        	//输入框获取焦点
+        	s.onfocus=function(){
+        		list.style.display="block";
+        	}
+        	//按键
+        	document.onkeydown=function(e){
+        		if(e.keyCode==40){     //按向下
+        			Num++;
+        			if(Num==lis.length)Num=0;
+        			drow();
+        		}
+        		if(e.keyCode==38){    //向上
+        			Num--;
+        			if(Num==-1)Num=lis.length-1;
+        			drow();
+        		}
+        	}
+    	}
+    </script>
+</head>
+<body>
+<div id="box">
+    <input type="text" id="s" autocomplete="off"/>
+    <ul id="list">
+        <li><a href="javascript:;">《第七个读者》</a></li>
+        <li><a href="javascript:;">《 心理罪 画像》</a></li>
+        <li><a href="javascript:;">《 心理罪 教化场》</a></li>
+        <li><a href="javascript:;">《 心理罪 暗河》</a></li>
+        <li><a href="javascript:;">《 心理罪 城市之光》</a></li>
+        <li><a href="javascript:;">《地球往事》</a></li>
+        <li><a href="javascript:;">《黑暗森林》</a></li>
+        <li><a href="javascript:;">《死神永生》</a></li>
+        <li><a href="javascript:;">《乡村教师》</a></li>
+        <li><a href="javascript:;">《地球大炮》</a></li>
+    </ul>
+</div>
+</body>
+</html>

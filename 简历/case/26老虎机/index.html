@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 800px;
+				height: 800px;
+				margin: 50px auto;
+				perspective: 1000px;
+			}
+			#box>div{
+				width: 200px;
+				height: 200px;
+				float: left;
+				background-size: 200px 200px;
+			}
+			#box .item{
+				box-shadow: 0 0 1px 1px goldenrod;
+				transition: .2s;
+				border-radius:100px;
+				box-shadow: 0 0 50px 1px goldenrod;
+			}
+			#content{
+				display: block;
+				position: absolute;
+				top: 200px;
+				left: 200px;
+				width: 400px;
+				height: 400px;
+				background-size: 400px 400px;
+				transition: .5s ease-in;
+			}
+		</style>
+	</head>
+	<body onselectstart="return false" oncontextmenu="return false">
+		<div id="box">
+			<div class="item" id="active"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div></div>
+			<div></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div></div>
+			<div></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<div class="item"></div>
+			<span id="content"></span>
+		</div>
+		<script type="text/javascript">
+			var arr=[0,1,2,3,7,11,15,14,13,12,8,4];
+			var box=document.getElementById("box");
+			var divs=box.getElementsByTagName("div");
+			var items=box.getElementsByClassName("item");
+			var content=document.getElementById("content");
+			var timer;     //定时器
+			var num=0;     //记录到数组中的第几个
+			var t=50;         //定时器时间间隔
+			var arr1=[];      //存储最后拼好的数组
+			var arr2=[];       //存储下次点击的开始位置
+			var n1=0;            //在第几格停下来
+			var onoff=true;     //对应可以点击状态
+			var num2=0;         //停在第几个items
+			//初始化
+			for (var i = 0; i < items.length; i++) {
+				items[i].index=i;
+				items[i].style.backgroundImage="url(img/"+i+".png)";
+			}
+			//封装函数
+			function tab(n){      //红色块切换    为要第几个div亮起来
+				for (var i = 0; i < items.length; i++) {
+					items[i].style.backgroundColor="";
+					items[i].style.transform="";
+					items[i].style.boxShadow="0 0 50px 1px goldenrod";
+					items[i].style.opacity=0.8;
+				}
+				divs[n].style.backgroundColor="red";
+				divs[n].style.transform="translateZ(50px) scale(.8)";
+				divs[n].style.boxShadow="3px 3px 50px 10px goldenrod";
+				divs[n].style.opacity=1;
+			}
+			//开定时器
+			function setT(n1){
+				num2=Number(divs[arr[n1-1]].index);
+				timer=setInterval(function(){
+					tab(arr1[num]);
+					num++;
+					if(num>=arr1.length){              //如果循环完了
+						clearInterval(timer);
+						setTimeout(function(){
+							onoff=true;       //可以点击状态
+						},500)
+						for (var i = 0; i < items.length; i++) {
+							items[i].style.opacity=1;
+						}
+						content.style.transform="scale(1) translateZ(100px)";
+						return;
+					}
+					if(num>Math.floor((arr1.length-1)*0.5)&&num<arr1.length){ //如果走过了一半
+						content.style.backgroundImage="url(img/"+num2+".png)";
+						if(num>=arr1.length-5){                    //超过一半且到了最后5个
+							t+=(5-(arr1.length-1-num))*100;
+						}else{                                      //超过一半但是不到最后5个
+							t=100*(num/arr1.length);               
+						}
+						clearInterval(timer);
+						setT(n1);                               //递归
+					}
+				},(t+30));
+			}
+			window.onclick=function(){
+				if(onoff){             //如果处于可点击状态
+					var n=0;            //转几圈
+					n1=0;           //在第几格停下来
+					var temp=Math.random();
+					arr1=[];
+					arr1=arr2;      //将上次存储的开始位置先添加到arr1里
+					n=Math.floor(Math.random()*5)+0;   //5-9圈
+					for (var i = 0; i < n; i++) {     //将所有圈数的数组都添加到arr1里
+						arr1=arr1.concat(arr);
+					}
+					if(temp>=0&&temp<0.2){        //0.2的概率触发 谢谢
+						n1=7;   //停在div15
+					}else if(temp>=0.2&&temp<0.54){   //0.34概率触发10个安慰奖，每个0.04
+						n1=0;
+					}else if(temp>=0.54&&temp<0.58){   //0.04概率触发10个安慰奖，每个0.04
+						n1=1;
+					}else if(temp>=0.58&&temp<0.62){   //0.04概率触发10个安慰奖，每个0.04
+						n1=2;
+					}else if(temp>=0.62&&temp<0.66){   //0.04概率触发10个安慰奖，每个0.04
+						n1=3;
+					}else if(temp>=0.66&&temp<0.70){   //0.04概率触发10个安慰奖，每个0.04
+						n1=4;
+					}else if(temp>=0.7&&temp<0.74){   //0.04概率触发10个安慰奖，每个0.04
+						n1=5;
+					}else if(temp>=0.74&&temp<0.78){   //0.04概率触发10个安慰奖，每个0.04
+						n1=6;
+					}else if(temp>=0.78&&temp<0.82){   //0.04概率触发10个安慰奖，每个0.04
+						n1=8;
+					}else if(temp>=0.82&&temp<0.86){   //0.04概率触发10个安慰奖，每个0.04
+						n1=9;
+					}else if(temp>=0.86&&temp<0.90){   //0.04概率触发10个安慰奖，每个0.04
+						n1=11;
+					}else{                            //0.1概率触发大奖
+						n1=10;//停在div12
+					}
+					arr1=arr1.concat(arr.slice(0,n1));   //将结束位置添加到arr1里
+					arr2=arr.slice(n1);             //用作第二次点击的开始位置
+					num=0;            //清空计数器
+					t=50;             //重置t
+					content.style.transform="scale(0) translateZ(0px)";
+					setT(n1);
+					onoff=false;     //不可点击状态
+				}
+			}	
+		</script>
+	</body>
+</html>

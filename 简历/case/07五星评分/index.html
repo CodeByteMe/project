@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>百度评分</title>
+		<style>
+			body,h1 {
+				margin: 0;
+				padding: 0;
+				-webkit-font-smoothing: antialiased;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="pingfen.css"/>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="baidu">
+				<div class="caption">
+					<h1></h1>
+					<span>总体评价</span>
+				</div>
+				<div class="context">
+					<div class="starts">
+						<span>☆</span>
+						<span>☆</span>
+						<span>☆</span>
+						<span>☆</span>
+						<span>☆</span>
+					</div>
+					<div class="info"></div>
+				</div>
+				<div class="tips">
+					小提示：点击星星就能打分
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var oStars=document.getElementsByClassName("starts")[0];
+			var aSpan=oStars.getElementsByTagName("span");
+			var oInfo=document.getElementsByClassName("info")[0];
+			var num=0;    //用来存储点击了哪一个按钮
+			var arr=["","极差","一般","不错","推荐","力推"];
+			//封装函数
+			function drow(n){       //绘制星星
+				oInfo.innerHTML=arr[n];   //显示星级对应的文字
+			//如果未曾点击过，n=num=0，而arr[0]是空字符串，
+			//导致oInfo没有内容，又因为oInfo未设置高度需要由内容（文字的行高30px）撑开，
+			//所以此时没有内容的oInfo高度为零不显示。
+				for (var i = 0; i < aSpan.length; i++) {   //先清除所有的星星
+					aSpan[i].innerHTML="☆";
+					aSpan[i].style.cssText="";
+				}
+				if(n>2){    //如果在大于两个的地方离开，红色
+					for (var i = 0; i <n; i++) {
+						aSpan[i].innerHTML="★";
+						aSpan[i].style.color="red";
+					}
+				}else if(n>0&&n<3){         //如果在前两个地方离开，紫色
+					for (var i = 0; i <n; i++) {
+						aSpan[i].innerHTML="★";
+						aSpan[i].style.color="plum";
+					}
+				}
+			}
+			//给每一个span添加三种事件
+			for (var i = 0; i < aSpan.length; i++) {   
+				aSpan[i].index=i+1;
+				aSpan[i].onmouseover=function(){
+					drow(this.index);
+				}
+				
+				aSpan[i].onmouseout=function(){
+					drow(num);
+				}
+				
+				aSpan[i].onclick=function(){
+					num=this.index;    //记录点击过第几个
+				}
+			}
+		</script>
+	</body>
+</html>

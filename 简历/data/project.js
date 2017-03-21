@@ -14,45 +14,30 @@
 
 var projects = [
 		{
-			projectName:"整屏切换+动画制作“TweenMax库”",
-			projectWebsite:"http://2013.miaov.com/miaov_demo/diagnosite/",
-		    startTime:"2016.01.01",
-			endTime:"至今",
-			projectExplain:"JS整站开发之：整屏切换+动画制作神器“TweenMax库” 导航条和首屏出场动画、3D翻转实现、整屏切换，页面动画计算滚动条滚动距离， 拖动滚动条触发页面动画，完善每一屏内的图片翻转，缩小浏览器，做布局转换。",
-			projectLabel:["html","css3","css","js"],
-			projectThumbnail:"images/icon/1.png"
+			projectName:"云盘",
+			projectWebsite:"project/云盘/index.html",
+		    startTime:"2016.12.10",
+			endTime:"2017.01.20",
+			projectExplain:"less预处理，根据扁平化模拟数据渲染页面；新建、删除、移动、重命名文件或文件夹；操作单个文件或批处理文件；面包屑导航点击回退；树形菜单单机双击折叠、打开操作；鼠标拖动文件并移动到其他文件、鼠标框选多个文件等操作。",
+			projectLabel:["html","css3","js","less"],
+			projectThumbnail:"project/云盘/云盘.gif"
 		},
 		{
-			projectName:"妙味VIP会员感恩墙",
-			projectWebsite:"http://v.miaov.com/thanks/",
-		    startTime:"2016.01.01",
-			endTime:"至今",
-			projectExplain:"用户观看视频的主页面，其大部分内容是通过JS加载的。为了提高性能，采用了延迟加载、延迟渲染、事件代理等优化方式。此外，还通过监听页面的window.onerror事件对异常信息进行采集，以便及时发现和排查故障。",
-			projectLabel:["html","css3","css","js"],
-			projectThumbnail:"images/icon/project-2.png"
-		},{
-			projectName:"腾讯电脑管家",
-			projectWebsite:"http://2013.miaov.com/student/liujian/works/1/html/",
-		    startTime:"2016.01.01",
-			endTime:"至今",
-			projectExplain:"用户观看视频的主页面，其大部分内容是通过JS加载的。为了提高性能，采用了延迟加载、延迟渲染、事件代理等优化方式。此外，还通过监听页面的window.onerror事件对异常信息进行采集，以便及时发现和排查故障。",
-			projectLabel:["html","css3","css","js"],
-			projectThumbnail:"images/icon/project-3.png"
-		},{
-			projectName:"独具匠心的“百度云”",
-			projectWebsite:"http://2013.miaov.com/student/xzy/index.html",
-		    startTime:"2016.01.01",
-			endTime:"至今",
-			projectExplain:"用户观看视频的主页面，其大部分内容是通过JS加载的。为了提高性能，采用了延迟加载、延迟渲染、事件代理等优化方式。此外，还通过监听页面的window.onerror事件对异常信息进行采集，以便及时发现和排查故障。",
-			projectLabel:["html","css3","css","js"],
-			projectThumbnail:"images/icon/project-4.png"
-		},{
-			projectName:"56网PC视频播放页",
-			projectWebsite:"http://www.miaov.com",
-		    startTime:"2016.01.01",
-			endTime:"至今",
-			projectExplain:"用户观看视频的主页面，其大部分内容是通过JS加载的。为了提高性能，采用了延迟加载、延迟渲染、事件代理等优化方式。此外，还通过监听页面的window.onerror事件对异常信息进行采集，以便及时发现和排查故障。",
-			projectLabel:["html","css3","css","js"],
-			projectThumbnail:"images/icon/project.png"
-		}
+			projectName:"部落3游戏",
+			projectWebsite:"project/部落3游戏/html/index.html",
+		    startTime:"2017.02.10",
+			endTime:"2017.02.27",
+			projectExplain:"运用H5的video、audio及canvas，借助TweenMax，采用ES6的let、set、箭头函数、超级字符串、class类等，OOP面向对象式编程。",
+			projectLabel:["html5","css3","js","canvas","ES6"],
+			projectThumbnail:"project/部落3游戏/部落3游戏.gif"
+		},
+		{
+			projectName:"外卖APP",
+			projectWebsite:"project/外卖APP/dist/index.html",
+		    startTime:"2017.03.01",
+			endTime:"2017.03.18",
+			projectExplain:"一个完整的移动端SPA Web APP，以线上生产环境的要求开发。vue-cli脚手架工程化项目；npm包管理；vue-loader组件化、模块化开发；vue-router分发路由实现单页SPA；使用node搭载服务器环境，mock数据；localstorge本地存储；vue-resource实现Ajax通信；es6 + babel + eslint；Webpack打包；自测。",
+			projectLabel:["html5","css3","js","vue","node.js"],
+			projectThumbnail:"project/外卖APP/外卖APP.gif"
+		},
 ]

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html><!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width: 700px;
+				margin: 100px auto;
+			}
+			li{
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				float: left;
+				width: 100px;
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				border: 1px solid #000;
+				box-sizing: border-box;
+			}
+			ul{
+				padding: 0;
+			}
+			#list{
+				width: 700px;
+				height: 50px;
+			}
+			#content{
+				width: 700px;
+				font-size: 18px;
+			}
+			#top{
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				font-size: 48px;
+				font-weight: bold;
+			}
+			input{
+				height: 50px;
+				font-weight: bold;
+				font-size: 48px;
+				border: 2px solid yellowgreen;
+				line-height: 50px;
+				text-align: center;
+			}
+			#year{
+				width: 110px;
+			}
+			#month{
+				width: 55px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="top">
+				<input type="button" name="" id="left" value="<" />
+				<input type="text" id="year" value="2016"></input>
+				年
+				<input type="text" id="month" value="10"></input>
+				月
+				<input type="button" value=">" id="right"/>
+			</div>
+			<ul id="list">
+				<li>日</li>
+				<li>一</li>
+				<li>二</li>
+				<li>三</li>
+				<li>四</li>
+				<li>五</li>
+				<li>六</li>
+			</ul>
+			<ul id="content">
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+		</div>
+		<script>
+		//总思路：找到当前月1号是星期几，找到当前月有多少天，根据这两个数生成日历
+			var content = document.getElementById("content");
+			var now = new Date();
+			var left=document.getElementById("left");
+			var right=document.getElementById("right");
+			var year=document.getElementById("year");
+			var month=document.getElementById("month");
+			var last1="";    //暂存当前年
+			var last2="";    //暂存当前月
+			//初始化成当前日期
+			tab();
+			//封装函数，根据传入参数改变日历
+			function tab(){          //a是年 b是通常概念的月
+				now.setDate(1);//设置日期为第一天
+				now.setFullYear(Number(year.value));//设置那年
+				now.setMonth(Number(month.value)-1);//设置那月
+				var week = now.getDay();//获取那年那月第一天是星期几
+				now.setMonth(Number(year.value));   //下一个月
+				now.setDate(0);      //因为是0所以变成上个月最后一天
+				var monthLength = now.getDate();//获取上个月最后一天是几号
+				var str = "";
+				for (var i = 0; i < monthLength+week; i++) {
+					if( i<week ){
+						str+="<li style='opacity:0'></li>";
+					}else{
+						str+="<li>"+(i-week+1)+"</li>";
+					}
+				}
+				content.innerHTML = str;
+			}
+			//触发改变日期的事件
+			left.onclick=function(){
+				month.value--;    //隐式类型转换
+				if(month.value==0){
+					month.value="12";
+					year.value--;
+				}
+				tab();
+			}
+			right.onclick=function(){
+				month.value++;
+				if(month.value==13){
+					month.value="1";
+					year.value++;
+				}
+				tab();
+			}
+			year.onfocus=function(){
+				last1=this.value;
+			}
+			month.onfocus=function(){
+				last2=this.value;
+			}
+			year.onblur=function(){
+				this.value=this.value.trim();   //帮助去掉首尾空格
+				if(!isNaN(this.value)&&parseFloat(this.value)==parseInt(this.value)&&this.value.length<5&&this.value!=""){
+					//是正常数字        不是小数                                                                                四位数字                                   输入不为空
+					this.value=this.value-1+1;     //不使用正则，通过数值运算隐式类型转换将年份前面的数字0去掉（数值类型会自动去掉前面的0）
+					tab();
+				}else{
+					alert("请输入正确年份");
+					this.value=last1;
+				}
+				
+			}
+			month.onblur=function(){
+				this.value=this.value.trim();     //帮助去掉首尾空格
+				if(!isNaN(this.value)&&parseFloat(this.value)==parseInt(this.value)&&this.value<13&&this.value>0&&this.value!=""){
+					this.value=this.value-1+1;
+					tab();
+				}else{
+					alert("请输入正确月份");
+					this.value=last2;
+				}
+			}
+			
+		</script>
+	</body>
+</html>

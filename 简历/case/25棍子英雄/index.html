@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>棍子英雄</title>
+		<style type="text/css">
+			body{
+				margin: 0;
+			}
+			#box{
+				width: 600px;
+				height: 900px;
+				margin:10px auto;
+				position: relative;
+				transform: scale(0.9);
+				overflow: hidden;
+				background: black;
+			}
+			#me{                      /*人物*/
+				width: 100px;
+				height: 100px;
+				background-image:url(img/runing.gif) ;
+				background-size: 100px;
+				background-position: 0 13px;
+				background-repeat: no-repeat;
+				position: absolute;
+				bottom: 250px;
+				left: 0;
+				z-index: 2;
+				transform: rotate(0) scale(1);
+				transition-timing-function: linear;
+			}
+			#bord{              /*木板*/
+				width: 2px;
+				height: 5px;
+				background: green;
+				position: absolute;
+				bottom:250px ;
+				left: 98px;
+				z-index: 3;
+				transform: rotate(0deg);
+				transform-origin: left bottom;
+				display: none;
+			}
+			.pillar{                    /*柱子*/
+				background: black;
+				width: 100px;
+				height: 250px;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				z-index: 1;
+			}
+		</style>
+	</head>
+	<body>
+		玩法：按住鼠标左键棍子变长，松开鼠标左键棍子倒下变成桥，如果桥的长度合适则人物可以顺利过桥，否则摔下悬崖死亡。
+		<div id="box">
+			<div id="me"></div>
+			<div id="bord"></div>
+			<div class="pillar"></div>
+		</div>
+		<script src="封装好的运动函数move.js" type="text/javascript" charset="utf-8"></script>
+		<script src="tween.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var box=document.getElementById("box");
+			var arrImg=["url(img/bg1.png)","url(img/bg2.png)","url(img/bg3.png)","url(img/bg4.png)","url(img/bg5.png)","url(img/bg6.png)","url(img/bg7.png)","url(img/bg8.png)","url(img/bg9.png)"];
+			box.style.backgroundImage=arrImg[Math.floor(Math.random()*8.9)];
+			var onoff=true;     //是否可以鼠标按下，true可以按下
+			var onoff1=true;    //是否可以鼠标抬起，true代表可以抬起
+			//生成新柱子
+			var newPlace=(Math.random()*300+150);
+			var newWidth=(Math.random()*50+100);
+			box.innerHTML+= '<div class="pillar" style="width:'+newWidth+'px;left:'+newPlace+'px;"></div>';
+			var pillars=document.getElementsByClassName("pillar");
+			//鼠标控制木板变化
+			var bord=document.getElementById("bord");
+			var timer1;
+			var timer2;
+			var h=0;    //木板长度
+			document.onmousedown=function(){
+				if(onoff){
+					onoff=false;
+					h=0;
+					bord.style.transition=0;
+					bord.style.display="block";
+				    timer1=setInterval(function(){
+						h++;
+						h>650?h=650:h=h;
+						bord.style.height=h+"px";
+					},16);
+				}	
+			}
+			document.onmouseup=function(){
+				if(onoff1){    //如果鼠标可以抬起
+					onoff1=false;
+					var n=0;
+					clearInterval(timer1);
+					timer2=setInterval(function(){
+						n=n+2;
+						if(n<=90){
+							bord.style.transform="rotate("+n+"deg)";     //旋转木板
+						}else{   //只会执行一次
+							clearInterval(timer2);
+							if(h>(newPlace-100)&&h<(newPlace-100)+newWidth){     //木板正合适
+								me.style.transition=(newPlace/50)+"s";     //人物开始移动     
+								me.style.left=newPlace+newWidth-100+"px";
+								setTimeout(function(){     //画面向左移动
+									pillars[1].style.transition=(newPlace+newWidth)/100+"s";
+									pillars[1].style.left=-newWidth+100+"px";
+									pillars[0].style.transition=(newPlace+newWidth)/100+"s";
+									pillars[0].style.left=-(newPlace+newWidth)+100+"px";
+									bord.style.cssText="";      //木板初始化
+									me.style.transition=(newPlace+newWidth)/100+"s";
+									me.style.left=0;            //人物初始化
+									setTimeout(function(){        //柱子初始化
+										pillars[0].style.transition=0+'s';
+										pillars[1].style.transition=0+"s";
+										pillars[0].style.left=0;
+										newPlace=(Math.random()*300+150);
+										newWidth=(Math.random()*50+100);
+										pillars[1].style.left=newPlace+"px";
+										pillars[1].style.width=newWidth+"px";
+										box.style.backgroundImage=arrImg[Math.floor(Math.random()*8.9)];
+										bord.style.display="none";
+										onoff=true;  //鼠标又可以按下了
+										onoff1=true;  //鼠标又可以抬起了
+									},(newPlace+newWidth)*10);
+								},newPlace*20);
+							}else{    //木板长度不合适
+								me.style.transition=((h+50)/50)+"s";           //人物移动到下落点 
+								me.style.left=h+50+"px";              //会等人走完（transition结束）再开启定时器吗？
+								setTimeout(function(){
+									bord.style.transition=0.5+"s";
+									bord.style.transform="rotate(135deg)";
+									me.style.transition=2+"s";
+									me.style.transitionTimingFunction="easy-in";
+									me.style.bottom="-100px";
+									me.style.transformOrigin="50px 50px";
+									me.style.transform="rotate(720deg) scale(0.7)";
+									setTimeout(function(){
+										alert("Game Over");
+										document.onmousedown=function(){
+											return false;
+										};
+										document.onmouseup=function(){
+											return false;
+										};
+									},2000)
+								},h*15)     //h*5等人移动到下落点
+							}
+						}
+					},16);
+				}
+			}
+			//
+			
+		</script>
+	</body>
+</html>

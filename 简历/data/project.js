@@ -36,7 +36,7 @@ var projects = [
 			projectWebsite:"project/外卖APP/dist/index.html",
 		    startTime:"2017.03.01",
 			endTime:"2017.03.18",
-			projectExplain:"一个完整的移动端SPA Web APP，以线上生产环境的要求开发。vue-cli脚手架工程化项目；npm包管理；vue-loader组件化、模块化开发；vue-router分发路由实现单页SPA；使用node搭载服务器环境，mock数据；localstorge本地存储；vue-resource实现Ajax通信；es6 + babel + eslint；Webpack打包；自测。",
+			projectExplain:"学习并尝试制作一款完整的SPA，以线上生产环境的要求开发。vue-cli脚手架工程化项目；npm包管理；vue-loader组件化、模块化开发；vue-router路由；使用node搭载服务器环境开发及测试，mock数据；localstorge本地存储；vue-resource实现Ajax通信；es6 + babel + eslint；Webpack打包；真机测试。",
 			projectLabel:["html5","css3","js","vue","node.js"],
 			projectThumbnail:"project/外卖APP/外卖APP.gif"
 		},

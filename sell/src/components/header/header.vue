@@ -101,7 +101,7 @@
     position: relative
     overflow: hidden
     color: #fff
-    background: rgba(225, 145, 51, 1)
+    background: rgba(90, 170, 96, 1)
     .content-wrapper
       position: relative
       padding: 24px 12px 18px 24px
@@ -114,6 +114,10 @@
       .content
         display: inline-block
         margin-left: 16px
+        @media only screen and (max-width: 320px)
+          max-width:150px
+          white-space:nowrap
+          overflow:hidden
         .title
           margin: 2px 0 8px 0
           .brand
@@ -247,7 +251,6 @@
               padding: 0 12px
               font-weight: 700
               font-size: 14px
-
           .supports
             width: 80%
             margin: 0 auto

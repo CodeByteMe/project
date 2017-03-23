@@ -5,7 +5,7 @@ var data = {
 			pid:-1,
 			title:"微云",
 			type:"file",
-			tree_onoff:"true"        /*树中自己的子级ul是否打开*/
+			tree_onoff:"true"
 		},
 		{
 			id:1,

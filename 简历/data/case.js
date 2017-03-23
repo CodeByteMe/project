@@ -74,13 +74,6 @@ var casees = [
 					caseThumbnail:"case/08百度音乐/08百度音乐.gif",
 					caseDescription:"说明：隔行变色取模%，input的checked，for循环配合if语句判断是否全选",
 					caseWebsite:"case/08百度音乐/index.html"
-				},
-				{
-					caseTitle:"擦除图片",
-					publishTime:"2016-10-24",
-					caseThumbnail:"case/09擦除图片/09擦除图片.gif",
-					caseDescription:"说明：2D旋转，transform",
-					caseWebsite:"case/09擦除图片/index.html"
 				}
 			]
 		},
@@ -231,34 +224,41 @@ var casees = [
 				{
 					caseTitle:"贪吃蛇",
 					publishTime:"2017-01-02",
-					caseThumbnail:"images/case/24贪吃蛇/贪吃蛇.gif",
+					caseThumbnail:"case/24贪吃蛇/贪吃蛇.gif",
 					caseDescription:"说明：经典贪吃蛇玩法。上下左右移动，蛇撞墙或撞自己会死亡，吃果实身体会变长。",
-					caseWebsite:"images/case/24贪吃蛇/index.html"
+					caseWebsite:"case/24贪吃蛇/index.html"
 				},
 				{
 					caseTitle:"棍子英雄",
 					publishTime:"2017-01-04",
-					caseThumbnail:"images/case/25棍子英雄/棍子英雄.gif",
+					caseThumbnail:"case/25棍子英雄/棍子英雄.gif",
 					caseDescription:"说明：按住鼠标左键棍子变长，松开鼠标左键棍子倒下变成桥，如果桥的长度合适则人物可以顺利过桥，否则摔下悬崖死亡。",
-					caseWebsite:"images/case/25棍子英雄/index.html"
+					caseWebsite:"case/25棍子英雄/index.html"
 				},
 				{
 					caseTitle:"老虎机",
 					publishTime:"2017-01-06",
-					caseThumbnail:"images/case/26老虎机/26老虎机.gif",
+					caseThumbnail:"case/26老虎机/26老虎机.gif",
 					caseDescription:"说明：单机左键开始抽奖。",
-					caseWebsite:"images/case/26老虎机/index.html"
+					caseWebsite:"case/26老虎机/index.html"
 				},
 				{
 					caseTitle:"坦克开火",
 					publishTime:"2017-01-10",
-					caseThumbnail:"images/case/27坦克开火/27坦克开火.gif",
+					caseThumbnail:"case/27坦克开火/27坦克开火.gif",
 					caseDescription:`说明：小键盘1,2,3,5控制移动，空格发射子弹。<br/>解决问题：
 										①老师数组法解决按下两个键抬起一个键的bug
 										②解决方向右键的bug：改用小键盘1235
 										③解决按住空格再走动会停止发射子弹 （开定时器发射炮弹）
 										④解决了傻转270度转回去"`,
-					caseWebsite:"images/case/27坦克开火/index.html"
+					caseWebsite:"case/27坦克开火/index.html"
+				},
+				{
+					caseTitle:"3D日历",
+					publishTime:"2016-11-24",
+					caseThumbnail:"case/093D日历/3D日历.gif",
+					caseDescription:"说明：CSS3 的 tansform3D 动画；json 模拟后台数据并根据数据渲染页面；通过传哈希的方式实现页面之间的信息传递。点击节日方块会跳转到详情页。目前只兼容chrome",
+					caseWebsite:"case/093D日历/index.html"
 				}
 			]
 		},

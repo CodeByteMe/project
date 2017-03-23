@@ -27,8 +27,11 @@
                     <span class="count">月售{{food.sellCount}}份</span><span>好评率{{food.rating}}%</span>
                   </div>
                   <div class="price">
-                    <span class="now">￥{{food.price}}</span><span class="old"
+                		￥<span class="now">{{food.price}}</span><span class="old"
                                                                   v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                  </div>
+                  <div class="cartcontrol-wrapper">
+                    <cartcontrol @add="addFood" :food="food"></cartcontrol>
                   </div>
                 </div>
               </li>
@@ -36,13 +39,17 @@
           </li>
         </ul>
       </div>
+    	<shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice"
+                :minPrice="seller.minPrice"></shopcart>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-	import BScroll from 'better-scroll';
-	
+  import BScroll from 'better-scroll';
+  import shopcart from 'components/shopcart/shopcart';
+  import cartcontrol from 'components/cartcontrol/cartcontrol';
+
   const ERR_OK = 0;
 
   export default {
@@ -69,6 +76,17 @@
           }
         }
         return 0;
+      },
+      selectFoods() {
+        let foods = [];
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food);
+            }
+          });
+        });
+        return foods;
       }
     },
     created() {
@@ -78,7 +96,6 @@
         response = response.body;
         if (response.errno === ERR_OK) {
           this.goods = response.data;
-          // 虽然获取到了数据，但是更新dom的操作是异步处理的，此时还没有初始化dom，所以插件高度计算错误到值无法滚动。this.$nextTick是下一次dom更新，传入一个回调函数使得下一次dom更新完之后再添加滚动
           this.$nextTick(() => {
             this._initScroll();
             this._calculateHeight();
@@ -88,12 +105,28 @@
     },
     methods: {
       selectMenu(index, event) {
-        if (!event._constructed) { // 防止pc端产生两次点击，只有插件分配的点击才有_constructed
+        if (!event._constructed) {
           return;
         }
         let foodList = this.$refs.foodList;
         let el = foodList[index];
         this.foodsScroll.scrollToElement(el, 300);
+      },
+      selectFood(food, event) {
+        if (!event._constructed) {
+          return;
+        }
+        this.selectedFood = food;
+        this.$refs.food.show();
+      },
+      addFood(target) {
+        this._drop(target);
+      },
+      _drop(target) {
+        // 体验优化,异步执行下落动画
+        this.$nextTick(() => {
+          this.$refs.shopcart.drop(target);
+        });
       },
       _initScroll() {
         this.meunScroll = new BScroll(this.$refs.menuWrapper, {
@@ -119,6 +152,10 @@
           this.listHeight.push(height);
         }
       }
+    },
+    components: {
+      shopcart,
+      cartcontrol
     }
   };
 </script>
@@ -194,13 +231,17 @@
 	    .icon
 	      flex: 0 0 57px
 	      margin-right: 10px
+	      img
+	      	border-radius:5px
 	    .content
 	      flex: 1
+	      position:relative
 	      .name
 	        margin: 2px 0 8px 0
-	        height: 14px
-	        line-height: 14px
-	        font-size: 14px
+	        height: 16px
+	        line-height: 16px
+	        font-size: 16px
+	        font-weight:500
 	        color: rgb(7, 17, 27)
 	      .desc, .extra
 	        line-height: 10px
@@ -208,16 +249,19 @@
 	        color: rgb(147, 153, 159)
 	      .desc
 	        line-height: 12px
-	        margin-bottom: 8px
+	        margin-bottom: 4px
 	      .extra
 	        .count
 	          margin-right: 12px
 	      .price
 	        font-weight: 700
 	        line-height: 24px
+	        font-size: 12px
+	        color: rgb(240, 20, 20)
 	        .now
 	          margin-right: 8px
-	          font-size: 14px
+	          margin-left:0
+	          font-size: 16px
 	          color: rgb(240, 20, 20)
 	        .old
 	          text-decoration: line-through
@@ -225,6 +269,6 @@
 	          color: rgb(147, 153, 159)
 	      .cartcontrol-wrapper
 	        position: absolute
-	        right: 0
-	        bottom: 12px
+	        right: -8px
+	        bottom: -8px
 </style>

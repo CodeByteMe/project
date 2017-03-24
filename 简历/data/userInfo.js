@@ -24,14 +24,14 @@ var userInfo = {
     userPortrait:"images/icon/intro_03.png",
     jobWant:  "WEB前端开发工程师",
     userQQ:  "544429676",
-    userEmail:   "544429676@qq.com",
+    userEmail:   "wudongda1992@163.com",
     motto:  "Think first, Program later</br>先想好，后编程</br></br>Attitude decides everything, detail decides success or failure</br>态度决定一切，细节决定成败",
     userPhone: 18396815168,
-    userOrignPlace:  "山东省烟台市芝罘区" ,
-    userSeatPlace:  "北京市",
-    userWeibo: "",
-    userAssessment: "为人和善。",   
-    userHobby: ["运动","游戏","电影"],
+    userOrignPlace:  "25" ,
+    userSeatPlace:  "本科",
+    userWeibo: "web前端 | 北京",
+    userAssessment: "https://github.com/wudada1992",   
+    userHobby: '',
     userAward: ""
 }
 

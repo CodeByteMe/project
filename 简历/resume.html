@@ -41,5 +41,26 @@
 		<!-- 交互行为 -->
 		<script src="./js/interactive.js"></script>
 	</body>
-
+	<script type="text/javascript">
+		var del1=document.getElementsByClassName("project")[0].getElementsByClassName("smallbt")[0];
+		del1.parentNode.removeChild(del1);
+		var del2=document.getElementsByClassName("timeAxis")[0].getElementsByClassName("skills_title")[0].getElementsByTagName("h3")[0];
+		del2.innerHTML="经历时光轴";
+		var del3=document.getElementsByClassName("timeAxis")[0].getElementsByClassName("skills_title")[0].getElementsByTagName("p")[0];
+		del3.parentNode.removeChild(del3);
+		var del4=document.getElementsByClassName("skills")[0].getElementsByClassName("skills_title")[0].getElementsByTagName("p")[0];
+		del4.parentNode.removeChild(del4);
+		var info0=document.getElementsByClassName("intro_detail")[0].getElementsByClassName("detail_left")[0].getElementsByTagName("p")[0];
+		info0.innerHTML="手机";
+		var info1=document.getElementsByClassName("intro_detail")[0].getElementsByClassName("detail_left")[1].getElementsByTagName("p")[0];
+		info1.innerHTML="年龄";
+		var info2=document.getElementsByClassName("intro_detail")[0].getElementsByClassName("detail_left")[2].getElementsByTagName("p")[0];
+		info2.innerHTML="学历";
+		var info3=document.getElementsByClassName("intro_detail")[0].getElementsByClassName("detail_left")[3].getElementsByTagName("p")[0];
+		info3.innerHTML="职位";
+		var info4=document.getElementsByClassName("intro_detail")[0].getElementsByClassName("detail_left")[4].getElementsByTagName("p")[0];
+		info4.innerHTML="GitHub";
+		var info5=document.getElementsByClassName("footer")[0].getElementsByClassName("footleft")[0].getElementsByTagName("p")[0];
+		info5.innerHTML="最后更新于2017年3月24日";
+	</script>
 </html>

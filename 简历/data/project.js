@@ -27,7 +27,7 @@ var projects = [
 			projectWebsite:"project/部落3游戏/html/index.html",
 		    startTime:"2017.02.10",
 			endTime:"2017.02.27",
-			projectExplain:"运用H5的video、audio及canvas，借助TweenMax，采用ES6的let、set、箭头函数、超级字符串、class类等，OOP面向对象式编程。",
+			projectExplain:"运用H5的video、audio及canvas，借助TweenMax，采用ES6的let、set、箭头函数、超级字符串、class类等，OOP面向对象式编程。babel+uglifyjs编译、优化代码，提升性能。",
 			projectLabel:["html5","css3","js","canvas","ES6"],
 			projectThumbnail:"project/部落3游戏/部落3游戏.gif"
 		},
@@ -36,7 +36,7 @@ var projects = [
 			projectWebsite:"project/外卖APP/dist/index.html",
 		    startTime:"2017.03.01",
 			endTime:"2017.03.18",
-			projectExplain:"学习并尝试制作一款完整的SPA，以线上生产环境的要求开发。vue-cli脚手架工程化项目；npm包管理；vue-loader组件化、模块化开发；vue-router路由；使用node搭载服务器环境开发及测试，mock数据；localstorge本地存储；vue-resource实现Ajax通信；es6 + babel + eslint；Webpack打包；真机测试。",
+			projectExplain:"学习并尝试制作一款完整的SPA，以线上生产环境的要求开发。vue-cli脚手架工程化项目；npm包管理；vue-loader组件化、模块化开发；vue-router路由；使用node搭载服务器环境开发及测试，mock数据；localstorge本地存储；vue-resource实现Ajax通信；es6 + babel + eslint；Webpack打包。",
 			projectLabel:["html5","css3","js","vue","node.js"],
 			projectThumbnail:"project/外卖APP/外卖APP.gif"
 		},

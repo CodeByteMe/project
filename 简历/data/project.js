@@ -32,7 +32,7 @@ var projects = [
 			projectThumbnail:"project/部落3游戏/部落3游戏.gif"
 		},
 		{
-			projectName:"外卖APP",
+			projectName:"移动端APP",
 			projectWebsite:"project/外卖APP/dist/index.html",
 		    startTime:"2017.03.01",
 			endTime:"2017.03.18",
